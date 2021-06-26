@@ -1,0 +1,105 @@
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/cookieconsent.js"></script>
+  <script type="text/javascript">
+    var cc = initCookieConsent();
+
+    cc.run({
+      autorun: true,
+      delay: 0,
+      current_lang : '{{ DEFAULT_LANG }}',
+      autoclear_cookies: true,
+      cookie_expiration: 365,
+
+      gui_options : {
+        consent_modal : {
+            layout : 'cloud',
+            position : 'bottom',
+            transition : 'slide'
+        },
+        settings_modal : {
+            layout : 'box',
+            transition : 'slide'
+        }
+    },
+
+      onAccept: function(cookies){
+          console.log("Condition: " + cookies.level.indexOf("analytics"));
+          if (cookies.level.indexOf("analytics") !== -1) {
+            console.log("hi there");
+            window['dataLayer']=window['dataLayer']||[];
+            window['dataLayer'].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+            cc.loadScript('https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_TAG_MANAGER }}', function(){
+                console.log("loaded");
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-TJYB1NJ7KN');
+            });
+          }
+      },
+
+      languages : {
+            en : {
+                consent_modal : {
+                    title :  "I use cookies",
+                    description :  'This site uses cookies to improve your experience on this site and to show you relevant advertising. To find out more, read our <a aria-label="Privacy policy" class="cc-link" href="{{ SITEURL}}/pages/privacy-de.html#privacy">privacy policy</a>.',
+                    primary_btn: {
+                        text: 'Accept',
+                        role: 'accept_all'  //'accept_selected' or 'accept_all'
+                    },
+                    secondary_btn: {
+                        text : 'Deny',
+                        role : 'accept_necessary'   //'settings' or 'accept_necessary'
+                    }
+                },
+                settings_modal : {
+                    title : 'Cookie settings',
+                    save_settings_btn : "Save settings",
+                    accept_all_btn : "Accept all",
+                    close_btn_label: "Close",
+                  cookie_table_headers : [
+                    {col1: "Name" },
+                    {col2: "Domain" },
+                    {col3: "Expiration" },
+                    {col4: "Description" }
+                ],
+                    blocks : [
+                        {
+                            title : "Cookie usage",
+                            description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want.'
+                        },{
+                            title : "Strictly necessary cookies",
+                            description: 'Category description ... ',
+                            toggle : {
+                                value : 'necessary',
+                                enabled : false,
+                                readonly: true
+                            }
+                        },{
+                            title : "Analytics cookies",
+                            description: 'These cookies collect information about how you use the website, which pages you visited and which links you clicked on. All of the data is anonymized and cannot be used to identify you.',
+                            toggle : {
+                                value : 'analytics',
+                                enabled : false,
+                                readonly: false
+                            },
+                            cookie_table: [
+                            {
+                                col1: '_ga',
+                                col2: 'google.com',
+                                col3: '2 years',
+                                col4: 'Used to distinguish users.'
+                            },
+                            {
+                                col1: '_gid',
+                                col2: 'google.com',
+                                col3: '24 hours',
+                                col4: 'Used to distinguish users.'
+                            },
+                        ]
+                        },
+                    ]
+                }
+            }
+        }
+    });
+  </script>

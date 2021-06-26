@@ -46,6 +46,10 @@ The minimalist [Pelican](http://blog.getpelican.com/) theme.
 - [Tipue Search](https://github.com/getpelican/pelican-plugins/blob/master/tipue_search/)
 - [SEO](https://github.com/pelican-plugins/seo)
 
+## Dependencies
+
+- [Cookie Consent](https://github.com/orestbida/cookieconsent)
+
 ## Install
 
 The best way to install is over [pelican-themes](https://github.com/getpelican/pelican-themes).

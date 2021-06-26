@@ -3,7 +3,6 @@
     {{ msg % kwargs }}
   {%- endmacro -%}
 {% endif %}
-
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
@@ -77,6 +76,8 @@
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/font-awesome/css/solid.css">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.4.7/dist/cookieconsent.css">
+
   {% if CUSTOM_CSS %}
     <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet">
   {% endif %}
@@ -92,14 +93,6 @@
   {% if FAVICON %}
     <link rel="shortcut icon" href="{{ FAVICON }}" type="image/x-icon">
     <link rel="icon" href="{{ FAVICON }}" type="image/x-icon">
-  {% endif %}
-
-  {% if GOOGLE_ANALYTICS %}
-    {% include "partial/ga.html" %}
-  {% endif %}
-  
-  {% if GOOGLE_GLOBAL_SITE_TAG %}
-    {% include "partial/ggst.html" %}
   {% endif %}
 
   {% if BROWSER_COLOR %}
@@ -147,12 +140,10 @@
     });
   </script>
   {% endif %}
-  {% if GOOGLE_TAG_MANAGER %}
-    {% include "partial/gtm.html" %}
-  {% endif %}
   {% if MICROSOFT_CLARITY %}
     {% include "partial/clarity.html" %}
   {% endif %}
+
 </head>
 <body {% if not THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}class="{{ THEME_COLOR|default('light') }}-theme"{% endif %}>
   {% if GOOGLE_TAG_MANAGER %}
@@ -283,6 +274,8 @@
   {% if GUAGES %}
     {% include "partial/guages.html" %}
   {% endif %}
+
+  {% include "partial/privacy_consent.html" %}
 
   {% if ADD_THIS_ID %}
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ ADD_THIS_ID }}" async="async"></script>
